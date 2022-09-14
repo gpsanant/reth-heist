@@ -1,0 +1,1 @@
+@balancer-labs/v2-vault/contracts/interfaces/=lib/balancer-v2-monorepo/pkg/interfaces/contracts/vault/
