@@ -7,3 +7,6 @@
 [submodule "lib/rocketpool"]
 	path = lib/rocketpool
 	url = https://github.com/rocket-pool/rocketpool
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
