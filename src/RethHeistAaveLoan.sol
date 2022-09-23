@@ -74,7 +74,7 @@ contract RethHeistAaveLoan is FlashLoanReceiverBase {
         return true;
     }
 
-    function shoobeekFull(uint256 amountWeth, uint256 amountReth) public {
+    function swapAndBurn(uint256 amountWeth, uint256 amountReth) public {
         address[] memory assets = new address[](1);
         assets[0] = address(WETH);
 

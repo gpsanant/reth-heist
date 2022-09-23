@@ -21,7 +21,7 @@ contract MintAave is
         emit log_uint(address(msg.sender).balance);
         vm.startBroadcast();
         RethMintAaveLoan rm = new RethMintAaveLoan(ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5));
-        rm.shoobeekFull(10 ether);
+        rm.mintAndSwap(10 ether);
         vm.stopBroadcast();
 
         emit log_uint(WETH.balanceOf(address(rm)));
@@ -36,13 +36,14 @@ contract MintEuler is
     RethMintEulerLoan rm = RethMintEulerLoan(0x321c7DB15c33b93DD907fB2803a23275123D5c7b);
     //performs basic deployment before each test
     function run() external {
+        uint256 before = WETH.balanceOf(address(rm));
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY_UINT");
         vm.startBroadcast(deployerPrivateKey);
-        rm.shoobeekFull(150 ether);
+        rm.mintAndSwap(175 ether);
         vm.stopBroadcast();
-        emit log_uint(WETH.balanceOf(address(rm)));
+        emit log_uint(WETH.balanceOf(address(rm)) - before);
     }
 }
 
 
-//forge script script/Heist.s.sol:Heist --rpc-url $FORK_URL -vvvv
+//forge script script/Mint.s.sol:MintEuler --rpc-url $RPC_URL -vvvv

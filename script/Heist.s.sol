@@ -6,6 +6,7 @@ import "forge-std/StdJson.sol";
 import "forge-std/Test.sol";
 
 import "../src/RethHeistAaveLoan.sol";
+import "../src/RethHeistEulerLoan.sol";
 import "../src/RethHeistBalancerLoan.sol";
 import {RocketTokenRETHInterface as IRETH} from "@rocketpool/contracts/interfaces/token/RocketTokenRETHInterface.sol";
 import {RocketNodeDistributorInterface as INodeDistributor} from "@rocketpool/contracts/interfaces/node/RocketNodeDistributorInterface.sol";
@@ -34,7 +35,7 @@ contract HeistAave is
         // emit log_uint(address(msg.sender).balance);
         //     // 1350642958146299193
         vm.broadcast();
-        rh.shoobeekFull(amountWeth, amountReth);
+        rh.swapAndBurn(amountWeth, amountReth);
         emit log_uint(WETH.balanceOf(address(rh)));
     }
 }
@@ -58,8 +59,33 @@ contract HeistBal is
         uint256 amountReth = rETH.getRethValue(rETH.getTotalCollateral());
         emit log_named_uint("amount reth", amountReth);
         vm.broadcast();
-        rh.shoobeekFull(amountReth);
+        rh.swapAndBurn(amountReth);
         emit log_uint(rETH.balanceOf(address(rh)));
+    }
+}
+
+contract HeistEuler is
+    Script, Test
+{
+    Vm cheats = Vm(HEVM_ADDRESS);
+    IWETH private constant WETH = IWETH(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2);
+    IRETH private constant rETH = IRETH(0xae78736Cd615f374D3085123A210448E74Fc6393);
+    //performs basic deployment before each test
+    function run() external {
+        emit log_uint(address(msg.sender).balance);
+        vm.startBroadcast();
+        RethHeistEulerLoan rh = new RethHeistEulerLoan();
+        vm.stopBroadcast();
+
+        uint256 amountWeth = rETH.getTotalCollateral(); // this is an overestimate
+        emit log_named_uint("amount weth", amountWeth);
+        uint256 amountReth = rETH.getRethValue(rETH.getTotalCollateral());
+        emit log_named_uint("amount reth", amountReth);
+        // emit log_uint(address(msg.sender).balance);
+        //     // 1350642958146299193
+        vm.broadcast();
+        rh.swapAndBurn(amountWeth, amountReth);
+        emit log_uint(WETH.balanceOf(address(rh)));
     }
 }
 

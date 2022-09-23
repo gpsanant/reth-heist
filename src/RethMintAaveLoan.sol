@@ -77,7 +77,7 @@ contract RethMintAaveLoan is FlashLoanReceiverBase {
         return true;
     }
 
-    function shoobeekFull(uint256 amount) public {
+    function mintAndSwap(uint256 amount) public {
         address[] memory assets = new address[](1);
         assets[0] = address(WETH);
 

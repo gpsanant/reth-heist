@@ -30,7 +30,7 @@ contract RethHeistBalancerLoan is IFlashLoanRecipient {
 
     receive() external payable {}
 
-    function shoobeekFull(
+    function swapAndBurn(
         uint256 amount
     ) external {
         IERC20[] memory tokens = new IERC20[](1);
