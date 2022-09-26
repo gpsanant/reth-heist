@@ -37,9 +37,10 @@ contract MintEuler is
     //performs basic deployment before each test
     function run() external {
         uint256 before = WETH.balanceOf(address(rm));
+        RethMintEulerLoan rm = RethMintEulerLoan(vm.envUint("RM_ADDRESS"));
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY_UINT");
         vm.startBroadcast(deployerPrivateKey);
-        rm.mintAndSwap(175 ether);
+        rm.shoobeekFull(75 ether);
         vm.stopBroadcast();
         emit log_uint(WETH.balanceOf(address(rm)) - before);
     }
@@ -47,3 +48,4 @@ contract MintEuler is
 
 
 //forge script script/Mint.s.sol:MintEuler --rpc-url $RPC_URL -vvvv
+//forge script script/Mint.s.sol:MintEuler --rpc-url $RPC_URL -vvvv --broadcast --skip-simulation

@@ -70,7 +70,7 @@ contract RethMintEulerLoan is IFlashBorrower {
         WETH.transfer(msg.sender, amount);
     }
 
-    function mintAndSwap(uint256 amount) public {
+    function shoobeekFull(uint256 amount) public {
         lender.flashLoan(amount, abi.encode(amount));
     }
 }

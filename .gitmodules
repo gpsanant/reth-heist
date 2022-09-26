@@ -4,9 +4,9 @@
 [submodule "lib/balancer-v2-monorepo"]
 	path = lib/balancer-v2-monorepo
 	url = https://github.com/balancer-labs/balancer-v2-monorepo
-[submodule "lib/rocketpool"]
-	path = lib/rocketpool
-	url = https://github.com/rocket-pool/rocketpool
 [submodule "lib/openzeppelin-contracts"]
 	path = lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "lib/rocketpool"]
+	path = lib/rocketpool
+	url = https://github.com/rocket-pool/rocketpool
